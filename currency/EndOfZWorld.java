@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EndOfZWorld {
   public static int comboCount = 0;
