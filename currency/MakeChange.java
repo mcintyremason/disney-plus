@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class MakeChange {
   public static int comboCount = 0;
 
@@ -47,7 +45,7 @@ public class MakeChange {
     String[] names = {"Quarter", "Dime", "Nickel", "Penny"};
     int[] units = {25, 10, 5, 1};
     int[] combinations = new int[units.length];
-    int total = 25;
+    int total = 100;
 
     printArray(names);
     findCombinations(0, units, total, combinations);
