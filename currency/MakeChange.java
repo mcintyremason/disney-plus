@@ -23,9 +23,9 @@ public class MakeChange {
     System.out.print("\n");
   }
 
-  static void findCombinations(int index, int[] units, int total, int[] combinations) {
+  static void findcombination(int index, int[] units, int total, int[] combination) {
     if(total == 0) {
-      printArray(combinations);
+      printArray(combination);
       comboCount++;
       return;
     }
@@ -35,20 +35,20 @@ public class MakeChange {
     int coin = units[index];
 
     for(int i = 0; (coin * i) <= total; i++) {
-      combinations[index] = i;
-      findCombinations((index + 1), units,  (total - (coin * i)), combinations);
-      combinations[index] = 0;
+      combination[index] = i;
+      findcombination((index + 1), units,  (total - (coin * i)), combination);
+      combination[index] = 0;
     }
   }
 
   public static void main(String[] args) {
     String[] names = {"Quarter", "Dime", "Nickel", "Penny"};
     int[] units = {25, 10, 5, 1};
-    int[] combinations = new int[units.length];
+    int[] combination = new int[units.length];
     int total = 100;
 
     printArray(names);
-    findCombinations(0, units, total, combinations);
+    findcombination(0, units, total, combination);
     System.out.println("Count: " + comboCount);
   }
 }
