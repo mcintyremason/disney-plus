@@ -1,14 +1,12 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EndOfZWorld {
   static int comboCount = 0;
   static ArrayList<Integer> formats = new ArrayList<Integer>();
   static DecimalFormat df = new DecimalFormat("#");
 
-
-  public static void printArray(String[] output) {
+   static void printArray(String[] output) {
     for(int i = 0; i < output.length; i++) {
       if(i == 0) {
         formats.add(output[i].length());
@@ -21,7 +19,7 @@ public class EndOfZWorld {
     System.out.print("\n");
   }
 
-  public static void printArray(Float[] output) {
+  static void printArray(Double[] output) {
     for(int i = 0; i < output.length; i++) {
       if(i == 0) {
         System.out.printf("%" + formats.get(i) + "s", df.format(output[i]));
@@ -32,7 +30,7 @@ public class EndOfZWorld {
     System.out.print("\n");
   }
 
-  public static void findCombinations(int index, Float[] units, float total, Float[] combinations) {
+  static void findCombinations(int index, Double[] units, double total, Double[] combinations) {
     if(total == 0) {
       printArray(combinations);
       comboCount++;
@@ -41,57 +39,64 @@ public class EndOfZWorld {
 
     if(index == units.length) return;
 
-    float coin = units[index];
+    double coin = units[index];
 
-    for(int i = 0; (coin * i) <= total; i++) {
-      combinations[index] = (float)i;
-      findCombinations((index + 1), units,  (float)(total - (coin * i)), combinations);
-      combinations[index] = (float)0;
+    for(double i = 0; (coin * i) <= total; i++) {
+      combinations[index] = i;
+      findCombinations((index + 1), units,  (double)(total - (coin * i)), combinations);
+      combinations[index] = 0.0;
     }
   }
 
-  public static void main(String[] args) {
+  static void parseArguments(String[] args, ArrayList<String> names, ArrayList<Double> unitArgs) {
     String[] parsedArgs = args[0].split(",");
-
-    ArrayList<String> names = new ArrayList<String>();
-    ArrayList<Float> unitArgs = new ArrayList<Float>();
-
-    // Parse argument
+    
     for(int i = 0; i < parsedArgs.length; i++){
       if(i % 2 == 0) {
         names.add(parsedArgs[i]);
       } else {
-        unitArgs.add(Float.parseFloat(parsedArgs[i]));
+        unitArgs.add(Double.parseDouble(parsedArgs[i]));
+      }
+    }
+  }
+
+  // Find smallest unit (will have the largest value, as it occurs the most, and will be the total we want to yield)
+  static double findSmallestUnit(ArrayList<Double> unitArgs) {
+    double smallestUnit = 0;
+
+    for(int i = 0; i < unitArgs.size(); i++) {
+      Double unit = unitArgs.get(i);
+
+      if(unit > smallestUnit) {
+        smallestUnit = unit;
       }
     }
 
+    return smallestUnit;
+  }
 
-
-    float total = 0;
-    ArrayList<Float> relativeValues = new ArrayList<Float>();
-
-
-    // Find smallest unit of value (will have the largest value, and will be the total we want to achieve)
+  // Find relative value of each unit
+  static void findRelativeValues(ArrayList<Double> unitArgs, ArrayList<Double> relativeValues, double total) {
     for(int i = 0; i < unitArgs.size(); i++) {
-      Float unit = unitArgs.get(i);
-
-      if(unit > total) {
-        total = unit;
-      }
-    }
-
-    // Find relative value of each unit
-    for(int i = 0; i < unitArgs.size(); i++) {
-      Float unit = unitArgs.get(i);
-      Float relativeValue = total / unit;
+      Double unit = unitArgs.get(i);
+      Double relativeValue = total / unit;
 
       relativeValues.add(relativeValue);
     }
+  }
 
-    Float[] units = relativeValues.toArray(new Float[relativeValues.size()]);
-    Float[] combinations = new Float[unitArgs.size()];
+  public static void main(String[] args) {
+    double total = 0;
+    ArrayList<String> names = new ArrayList<String>();
+    ArrayList<Double> unitArgs = new ArrayList<Double>();
+    ArrayList<Double> relativeValues = new ArrayList<Double>();
 
-    System.out.println(Arrays.toString(units));
+    parseArguments(args, names, unitArgs);
+    total = findSmallestUnit(unitArgs);
+    findRelativeValues(unitArgs, relativeValues, total);
+
+    Double[] units = relativeValues.toArray(new Double[relativeValues.size()]);
+    Double[] combinations = new Double[unitArgs.size()];
 
     printArray(names.toArray(new String[names.size()]));
     findCombinations(0, units, total, combinations);
