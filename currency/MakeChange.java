@@ -1,7 +1,7 @@
 public class MakeChange {
-  public static int comboCount = 0;
+  static int comboCount = 0;
 
-  public static void printArray(String[] output) {
+  static void printArray(String[] output) {
     for(int i = 0; i < output.length; i++) {
       if(i == 0) {
         System.out.printf("%7s", output[i]);
@@ -12,7 +12,7 @@ public class MakeChange {
     System.out.print("\n");
   }
 
-  public static void printArray(int[] output) {
+  static void printArray(int[] output) {
     for(int i = 0; i < output.length; i++) {
       if(i == 0) {
         System.out.printf("%7s", output[i]);
@@ -23,7 +23,7 @@ public class MakeChange {
     System.out.print("\n");
   }
 
-  public static void findCombinations(int index, int[] units, int total, int[] combinations) {
+  static void findCombinations(int index, int[] units, int total, int[] combinations) {
     if(total == 0) {
       printArray(combinations);
       comboCount++;
