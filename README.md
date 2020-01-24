@@ -12,7 +12,7 @@
 	- `gradle run --args='"Quarter,4,Dime,10,Nickel,20,Penny,100"'`
 	- `gradle run --args='"Coin,1.5,Arrowhead,3,Button,150"'`
 
-## Test
+## Run Tests
 1. MakeChange
 	- `cd MakeChange`
 	- `gradle test`
