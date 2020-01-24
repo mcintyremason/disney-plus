@@ -15,10 +15,10 @@
 ## Run Tests
 1. MakeChange
 	- `cd MakeChange`
-	- `gradle test`
+	- `gradle cleanTest test --info`
 2. EndOfZWorld
 	- `cd EndOfZWorld`
-	- `gradle test`
+	- `gradle cleanTest test --info`
 
 ### Path to source
 - `MakeChange/src/main/java/App.java`
