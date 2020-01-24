@@ -39,3 +39,9 @@ application {
     // Define the main class for the application.
     mainClassName = "MakeChange.App"
 }
+
+sourceSets {                                
+    main {                                  
+        java.srcDir("src/main/java")
+    }
+}
