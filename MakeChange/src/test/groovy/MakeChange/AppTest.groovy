@@ -6,14 +6,14 @@ package MakeChange
 import spock.lang.Specification
 
 class AppTest extends Specification {
-    def "application has a greeting"() {
+    def "total combinations for a dollar equals 242"() {
         setup:
         def app = new App()
 
         when:
-        def result = app.greeting
+        app.main()
 
         then:
-        result != null
+        app.comboCount == 242
     }
 }
