@@ -1,5 +1,9 @@
 # Disney+
-## To Compile & Run
+
+## Install Dependencies
+- `brew install gradle`
+
+## Compile & Run
 1. MakeChange
 	- `cd MakeChange`
 	- `gradle run`
